@@ -109,6 +109,66 @@ You just have to change 5000 to the value you want (milliseconds).
 
 See [galleria.io](http://galleria.io) for more info.
 
+## Extras
+
+This gem is a Rails 3+ engine.
+
+Some *HAML* views (partials) are included in `app/views/gallery`
+
+## Rails views usage
+
+```ruby
+class PropertiesController < ApplicationController
+  def show
+    @property = property
+  end
+
+  protected
+
+  def property
+    Hashie::Mash.new  title: 'A beautiful property', 
+                      description: decription,
+                      photos: photos
+  end
+
+  def description
+    %q{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris arcu, auctor ac rhoncus non,  libero. Nulla dolor velit, volutpat a bibendum ut, hendrerit id mi. Pellentesque convallis erat in mi interdum rutrum. Phasellus interdum velit nulla.
+    }
+  end  
+
+  def photos
+    @photos ||= Photos.new nil, photo_class: Property::Photo
+    5.times do
+      @photos.pages << 6.times.map {|n| (Kernel.rand(7) + 1).to_s }
+    end
+    @photos
+  end
+end
+```
+
+Then in your `properties/show.html.haml`:
+
+```haml
+render partial: 'gallery/responsive', locals: { photos: @property.photos }
+```
+
+And so on...
+
+## View helpers
+
+There are also some view helpers included in `rails-gallery/view_helper.rb`
+
+`gallery_image type, photo`
+
+Example:
+
+```haml
+- photos.each do |photo|
+  = gallery_image :responsive, photo`
+```
+
+Enjoy!
+
 ## Contributing to rails-gallery
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
