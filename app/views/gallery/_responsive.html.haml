@@ -1,0 +1,30 @@
+#rg-gallery.rg-gallery
+  .rg-thumbs
+    // Elastislide Carousel Thumbnail Viewer
+    .es-carousel-wrapper
+      .es-nav
+        %span.es-nav-prev
+          Previous
+        %span.es-nav-next
+          Next
+      .es-carousel
+        %ul
+          - photos.all.each do |photo|
+            %li
+              %a{href:"#"}
+                = image_tag photo.thumb, :"data-large" => "/assets/#{photo.path}", :alt => photo.alt, :"data-description" => photo.title
+
+%script#img-wrapper-tmpl{style: "display:none;"}
+  .rg-image-wrapper
+    = "{{if itemsCount > 1}}"
+    .rg-image-nav
+      %a.rg-image-nav-prev{href: "#"}
+        Previous
+      %a.rg-image-nav-next{href: "#"}
+        Next
+    = "{{/if}}"
+    .rg-image
+    .rg-loading
+    .rg-caption-wrapper
+      .rg-caption{style: "display:none;"}
+        %p

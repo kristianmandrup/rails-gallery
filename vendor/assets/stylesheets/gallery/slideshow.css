@@ -1,0 +1,171 @@
+.msg_slideshow{
+  width:400px;
+  height:400px;
+  padding:10px;
+  position:relative;
+  overflow:hidden;
+  background:#101010 url(/assets/gallery/slideshow/icons/loading.gif) no-repeat center center;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+}
+.msg_slideshow a{
+  outline:none;
+}
+.msg_slideshow a img{
+  border:none;
+}
+.msg_wrapper{
+  width:400px;
+  height:400px;
+  position:relative;
+  margin:0;
+  padding:0;
+  display:table-cell;
+  text-align:center;
+  vertical-align:middle;
+}
+.msg_wrapper img{
+  display: inline-block!important;
+  vertical-align:middle;
+  -moz-box-shadow:0px 0px 10px #000;
+  -webkit-box-shadow:0px 0px 10px #000;
+  box-shadow:0px 0px 10px #000;
+}
+.msg_controls{
+  position:absolute;
+  bottom:15px;
+  right:-110px;
+  width:104px;
+  height:26px;
+  z-index: 20;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+  background-color:#000;
+  opacity:0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+}
+.msg_controls a{
+  float:left;
+  background-color:#000;
+  width:20px;
+  height:20px;
+  margin:3px 3px;
+  opacity:0.5;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  background-repeat:no-repeat;
+  background-position: center center;
+}
+.msg_controls a:hover{
+  opacity:1.0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+.msg_controls a.msg_grid{
+  background-image:url(/assets/gallery/slideshow/icons/grid.png);
+}
+.msg_controls a.msg_prev{
+  background-image:url(/assets/gallery/slideshow/icons/prev.png);
+}
+.msg_controls a.msg_next{
+  background-image:url(/assets/gallery/slideshow/icons/next.png);
+}
+.msg_controls a.msg_pause{
+  background-image:url(/assets/gallery/slideshow/icons/pause.png);
+}
+.msg_controls a.msg_play{
+  background-image:url(/assets/gallery/slideshow/icons/play.png);
+}
+.msg_thumbs{
+  background:#000;
+  position:absolute;
+  width:250px;
+  height:166px;
+  top:-230px;
+  left:50%;
+  padding:30px;
+  margin:0 0 0 -155px;
+  -moz-border-radius:0px 0px 10px 10px;
+  -webkit-border-bottom-left-radius:10px;
+  -webkit-border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+  border-bottom-right-radius:10px;
+  -moz-box-shadow:1px 1px 5px #000;
+  -webkit-box-shadow:1px 1px 5px #000;
+  box-shadow:1px 1px 5px #000;
+  opacity:0.9;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+  overflow:hidden;
+}
+.msg_thumb_wrapper{
+  position:absolute;
+  width:250px;
+  height:166px;
+  top:30px;
+  left:30px;
+  z-index:30;
+}
+.msg_thumb_wrapper a{
+  display:block;
+  width:75px;
+  height:75px;
+  float:left;
+  margin:4px;
+  opacity:0.5;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.msg_thumbs a.msg_thumb_next,
+.msg_thumbs a.msg_thumb_prev{
+  width:18px;
+  height:20px;
+  background-repeat:no-repeat;
+  background-position: center center;
+  position:absolute;
+  top:50%;
+  margin-top:-10px;
+  opacity:0.5;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.msg_thumbs a.msg_thumb_next:hover,
+.msg_thumbs a.msg_thumb_prev:hover{
+  opacity:1.0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+.msg_thumbs a.msg_thumb_next{
+  background-image:url(/assets/gallery/slideshow/icons/next_thumb.png);
+  right:5px;
+}
+.msg_thumbs a.msg_thumb_prev{
+  background-image:url(/assets/gallery/slideshow/icons/prev_thumb.png);
+  left:5px;
+}
+.msg_thumbs a.msg_thumb_close{
+  position:absolute;
+  bottom:0px;
+  width:50px;
+  left:50%;
+  margin:0 0 0 -25px;
+  background:#202020 url(/assets/gallery/slideshow/icons/up.png) no-repeat center center;
+  height:16px;
+  opacity:0.7;
+  -moz-border-radius:5px 5px 0 0;
+  -webkit-border-top-left-radius:5px;
+  -webkit-border-top-right-radius:5px;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+}
+.msg_thumbs a.msg_thumb_close:hover{
+  opacity:1.0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+.msg_loading{
+  position:absolute;
+  background:transparent url(/assets/gallery/slideshow/icons/loading.gif) no-repeat center center;
+  top:50%;
+  left:50%;
+  width:50px;
+  height:50px;
+  margin:-25px 0 0 -25px;
+  z-index:25;
+  display:none;
+}

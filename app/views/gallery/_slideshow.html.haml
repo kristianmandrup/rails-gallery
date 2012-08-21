@@ -1,0 +1,26 @@
+// http://tympanus.net/codrops/2010/07/05/minimalistic-slideshow-gallery/
+#msg_slideshow.msg_slideshow
+  #msg_wrapper.msg_wrapper
+  #msg_controls.msg_controls
+    // right has to animate to 15px, default -110px
+    %a#msg_grid.msg_grid{href: "#"}
+    %a#msg_prev.msg_prev{href: "#"}
+    %a#msg_pause_play.msg_pause{href: "#"}
+    // has to change to msg_play if paused
+    %a#msg_next.msg_next{href: "#"}
+  #msg_thumbs.msg_thumbs
+    // top has to animate to 0px, default -230px
+    .msg_thumb_wrapper      
+      - photos.page(:first).photos.each do |photo|
+        %a{href: "#"}
+          = image_tag photo.thumb, alt: "/assets/#{photo.path}"
+    - photos.pages.remainder.each do |page|
+      .msg_thumb_wrapper{style: 'display:none'}
+        - page.photos.each do |photo|
+          %a{href: "#"}
+            = image_tag photo.thumb, alt: "/assets/#{photo.path}"
+    %a#msg_thumb_next.msg_thumb_next{href: '#'}
+    %a#msg_thumb_prev.msg_thumb_prev{href: '#'}
+    %a#msg_thumb_close.msg_thumb_close{href: '#'} 
+    %span.msg_loading
+      Loading images...
