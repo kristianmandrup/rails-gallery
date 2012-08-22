@@ -32,7 +32,7 @@ Using Compass, f.ex in `application.css.scss.erb`
 
 ```
 @import 'gallery/responsive/elastislide';
-@import 'gallery/responsive/style';
+@import 'gallery/responsive';
 @import 'gallery/slideshow';
 @import 'gallery/galleria';
 ```
@@ -44,9 +44,9 @@ In `application.js` manifest file:
 //= require gallery/slideshow
 //= require gallery/galleria
 
-//= require jquery.easing-1.3
-//= require jquery.elastislide
-//= require jquery.tmpl.min
+//= require jquery/jquery.easing-1.3
+//= require jquery/jquery.elastislide
+//= require jquery/jquery.tmpl.min
 ```
 
 ## Minimalistic Slideshow gallery
