@@ -1,1 +1,1 @@
-require 'rails-gallery/photos'
+require 'rails-gallery/rgallery'

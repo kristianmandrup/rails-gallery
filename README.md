@@ -12,7 +12,7 @@ Popular Javascript Photo galleries/carousels ready to use with Rails 3+.
 * responsive
 * galleria
 
-Please add more ;)
+Please add more using a similar convention as is used for these galleries ;)
 
 ## Configuration
 
@@ -109,9 +109,9 @@ You just have to change 5000 to the value you want (milliseconds).
 
 See [galleria.io](http://galleria.io) for more info.
 
-## Extras
+## Rails engine usage
 
-This gem is a Rails 3+ engine.
+This gem is a Rails 3+ engine :)
 
 Some *HAML* views (partials) are included in `app/views/gallery`
 
@@ -137,7 +137,7 @@ class PropertiesController < ApplicationController
   end  
 
   def photos
-    @photos ||= Photos.new nil, photo_class: Property::Photo
+    @photos ||= RGallery::Photos.new nil, photo_class: Property::Photo
     5.times do
       @photos.pages << 6.times.map {|n| (Kernel.rand(7) + 1).to_s }
     end
@@ -145,6 +145,50 @@ class PropertiesController < ApplicationController
   end
 end
 ```
+
+This engine comes with a RGallery::Photos` model which can encapsulate your photos for display and allows you to group photos in multiple pages.
+The `RGallery::Photo` class is a base class for describing a photo. 
+
+You should create your own Photo class that inherits from `RGallery::Photo` (or implements the API), which knows how to render and describe your photos.
+
+Here a rough example:
+
+```ruby
+class Property
+  class Photo < RGallery::Photo
+    def path
+      File.join folder, super
+    end
+
+    # mogrify -path fullpathto/temp2 -resize 60x60% -quality 60 -format jpg *.png
+
+    # this will take all png files in your current directory (temp), 
+    # resize to 60% (of largest dimension and keep aspect ratio), 
+    # set jpg quality to 60 and convert to jpg.
+    def thumb
+      File.join folder, 'thumbs', file_path
+    end
+
+    def folder
+      'responsive-gallery/images'
+    end
+
+    def title
+      'property title'
+    end
+
+    def alt
+      'property alt'
+    end
+    
+    def self.extension
+      :jpg
+    end
+  end
+end
+```
+
+See the `lib/rails-gallery/rgallery/photos.rb
 
 Then in your `properties/show.html.haml`:
 
@@ -160,14 +204,44 @@ There are also some view helpers included in `rails-gallery/view_helper.rb`
 
 `gallery_image type, photo`
 
-Example:
+Simple example:
+
+Iterate all photos as a "single page".
 
 ```haml
-- photos.each do |photo|
+- photos.all.each do |photo|
   = gallery_image :responsive, photo`
 ```
 
+Pages example:
+
+Iterate photos, one page at a time.
+
+```haml
+- photos.pages.each do |photo|
+  = gallery_image :responsive, photo`
+```
+
+Advanced example:
+
+Iterate photos, first page visible, then remaining pages invisible.
+
+```haml
+.page.visible
+  - photos.page(:first).photos.each do |photo|
+    = gallery_image :responsive, photo`
+
+- photos.pages.remainder.each do |page|
+  .page.hidden
+    - page.photos.each do |photo|
+      = gallery_image :responsive, photo`
+```
+
 Enjoy!
+
+## TODO
+
+Would perhaps be nice to allow pages/albums to have info assigned, such as title and/or description, tags etc. ?
 
 ## Contributing to rails-gallery
  
