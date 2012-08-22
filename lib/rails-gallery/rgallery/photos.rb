@@ -1,5 +1,4 @@
 require 'enumerator'
-require 'rails-gallery/photo_config'
 
 module RGallery
   class Photos < PhotoConfig  
