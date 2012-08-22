@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "rails-gallery"
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -28,6 +28,8 @@ Gem::Specification.new do |s|
     "app/views/gallery/_galleria.html.haml",
     "app/views/gallery/_responsive.html.haml",
     "app/views/gallery/_slideshow.html.haml",
+    "app/views/gallery/template/_responsive.html.haml",
+    "config/locales/rails_gallery.yml",
     "lib/rails-gallery.rb",
     "lib/rails-gallery/engine.rb",
     "lib/rails-gallery/rgallery.rb",
@@ -37,6 +39,7 @@ Gem::Specification.new do |s|
     "lib/rails-gallery/rgallery/photo_config.rb",
     "lib/rails-gallery/rgallery/photos.rb",
     "lib/rails-gallery/view_helper.rb",
+    "lib/rails-gallery/view_helper/galleria.rb",
     "lib/rails-gallery/view_helper/responsive.rb",
     "lib/rails-gallery/view_helper/slideshow.rb",
     "rails-gallery.gemspec",
