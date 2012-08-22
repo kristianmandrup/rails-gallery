@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = "2012-08-21"
+  s.date = "2012-08-22"
   s.description = "TODO: longer description of your gem"
   s.email = "kmandrup@gmail.com"
   s.extra_rdoc_files = [
@@ -30,11 +30,16 @@ Gem::Specification.new do |s|
     "app/views/gallery/_slideshow.html.haml",
     "lib/rails-gallery.rb",
     "lib/rails-gallery/engine.rb",
-    "lib/rails-gallery/photo_config.rb",
-    "lib/rails-gallery/photos.rb",
+    "lib/rails-gallery/rgallery.rb",
+    "lib/rails-gallery/rgallery/page.rb",
+    "lib/rails-gallery/rgallery/pages.rb",
+    "lib/rails-gallery/rgallery/photo.rb",
+    "lib/rails-gallery/rgallery/photo_config.rb",
+    "lib/rails-gallery/rgallery/photos.rb",
     "lib/rails-gallery/view_helper.rb",
     "lib/rails-gallery/view_helper/responsive.rb",
     "lib/rails-gallery/view_helper/slideshow.rb",
+    "rails-gallery.gemspec",
     "spec/galleria_snippet.html",
     "spec/galleria_snippet.html.haml",
     "spec/images/photo_gallery/icons/IconsByGentleface.txt",
