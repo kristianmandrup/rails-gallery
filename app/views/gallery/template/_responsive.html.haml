@@ -1,0 +1,14 @@
+%script#img-wrapper-tmpl{style: "display:none;"}
+  .rg-image-wrapper
+    {{if itemsCount > 1}}
+    .rg-image-nav
+      %a.rg-image-nav-prev{href: "#"}
+        = t('rgallery.previous')
+      %a.rg-image-nav-next{href: "#"}
+        = t('rgallery.next')
+    {{/if}}
+    .rg-image
+    .rg-loading
+    .rg-caption-wrapper
+      .rg-caption{style: "display:none;"}
+        %p

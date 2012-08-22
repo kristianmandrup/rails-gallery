@@ -192,17 +192,45 @@ See the `lib/rails-gallery/rgallery/photos.rb
 
 Then in your `properties/show.html.haml`:
 
+*Responsive Gallery*
+
 ```haml
-render partial: 'gallery/responsive', locals: { photos: @property.photos }
+= render partial: 'gallery/template/responsive'
+= render partial: 'gallery/responsive', locals: { photos: @property.photos }
 ```
 
-And so on...
+Note :Currently only the *responsive* gallery uses a template, and thus requires rendering an extra partial.
+
+*Slideshow Gallery*
+
+```haml
+= render partial: 'gallery/slideshow', locals: { photos: @property.photos }
+```
+
+*Galleria*
+
+```haml
+= render partial: 'gallery/galleria', locals: { photos: @property.photos }
+```
+
+All galleries should follow this convention (or as close as possible)
+
+## Labels
+
+Note that all gallery labels are rendered using Rails I18n `I18n.t`.
+You should include appropriate translations for the following keys under 'rgallery':
+
+* previous
+* next
+* photos_loading
+
+The engine includes a `config/locales/rails_gallery.yml` file, currently only with english translation mappings. Include a `config/locales/rails_gallery.yml` file in your Rails app and override or supply you additional translation mappings ;)
 
 ## View helpers
 
 There are also some view helpers included in `rails-gallery/view_helper.rb`
 
-`gallery_image type, photo`
+`= gallery_image type, photo`
 
 Simple example:
 
@@ -238,6 +266,16 @@ Iterate photos, first page visible, then remaining pages invisible.
 ```
 
 Enjoy!
+
+## Adding more galleries
+
+Simply follow the existing conventions (see the code).
+
+*ViewHelpers*
+
+ Add the gallery name to the `#galleries` class method of the `ViewHelper` and create a module for that gallery with a `[name]_gallery_image(photo)` method.
+
+Then add gallery client-side pieces to the assets folder following conventions and make sure that your css files (and possible js files) references the icons used (and any other asset) correctly  using `/assets/` in the path ;)
 
 ## TODO
 

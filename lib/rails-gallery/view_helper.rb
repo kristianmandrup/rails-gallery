@@ -1,23 +1,27 @@
 module RailsGallery
   module ViewHelper
+    def self.galleries
+      %w{galleria responsive slideshow}
+    end
+
+    # autoload all galleries when references
+    galleries.each do |gallery|
+      autoload gallery.camelize.to_sym, "rails-gallery/view_helper/#{gallery}"
+    end
+
     def gallery_image type, photo
-      send("#{type}_gallery_image", photo)
+      meth_name = "#{type}_gallery_image"
+      unless respond_to? meth_name
+        raise ArgumentError, "Gallery #{type} is not yet supported. Please add a View helper module for this gallery using the convention followed by the other galleries..." 
+      end
+      send(meth_name, photo)
     end
 
     protected
 
-    def responsive_gallery_image photo
-      image_tag photo.thumb, :"data-large" => "/assets/#{photo.path}", :alt => photo.alt, :"data-description" => photo.title
-    end
-
-    def slideshow_gallery_image photo
-      image_tag photo.thumb, alt: "/assets/#{photo.path}"
-    end
-
-    def glleria_gallery_image photo
-      content_tag :a, href: "/assets/#{photo.path}" do
-        image_tag photo.path, :"data-title" => photo.title, :"data-description" => photo.description
-      end
+    # include view helper modules for all galleries :)
+    galleries.each do |gallery|
+      include "RailsGallery::ViewHelper::#{gallery.camelize}".constantize
     end
   end
 end
