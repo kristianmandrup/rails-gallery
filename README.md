@@ -95,15 +95,40 @@ To adjust placement of thumbnails, use: `prependTo` or `appendTo` in `gallery/re
 *Automatic slideshow*
 
 I wanted the same thing and I find a way to do it.
-In the file gallery.js, in the function _initCarousel add these lines after `$esCarousel.elastislide( ‘setCurrent’, current );` (~ line 103):
+In the file gallery.js, in the function _initCarousel add these lines after: 
+
+`$esCarousel.elastislide( 'setCurrent', current );`
 
 ```javascript
 window.setInterval(function(){
-_navigate( ‘right’ );
+  _navigate( 'right' );
 }, 5000);
 ```
 
-You just have to change 5000 to the value you want (milliseconds).
+You just have to change `5000` to the value you want (milliseconds).
+
+* Fancybox integration*
+
+First you have to include the js and the css file of fancybox in the file where you have the carousel.
+
+In the file `responsive.js`, replace this line: 
+
+`$rgGallery.find('div.rg-image').empty().append('img src="' + largesrc + '"');` 
+
+With this (which adds 'fancybox' class to all images):
+
+`$rgGallery.find('div.rg-image').empty().append('a class="fancybox"
+href="'+largesrc+ '" img src="' + largesrc + '" a');`
+
+In this line, don’t forget to add the `"` for the img and link tags.
+
+Then do the fancybox magic on any class with the `fancybox` class 
+
+```javascript
+$(document).ready(function() {
+  $(“.fancybox”).fancybox();
+});
+```
 
 ## Galleria
 
