@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "rails-gallery"
   gem.homepage = "http://github.com/kristianmandrup/rails-gallery"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Javascript galleries & carousels for instant use with Rails 3+ :)}
+  gem.description = %Q{Adds popular javascript galleries to asset pipeline and includes a few Rails Gallery utils and helpers}
   gem.email = "kmandrup@gmail.com"
   gem.authors = ["Kristian Mandrup"]
   # dependencies defined in Gemfile
