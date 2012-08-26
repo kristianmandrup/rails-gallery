@@ -11,6 +11,7 @@ Popular Javascript Photo galleries/carousels ready to use with Rails 3+.
 * slideshow
 * responsive
 * galleria
+* touch_touch
 
 Please add more using a similar convention as is used for these galleries ;)
 
@@ -25,16 +26,18 @@ In `application.css` manifest file:
  * require gallery/responsive/style
  * require gallery/slideshow
  * require gallery/galleria
+ * require gallery/touch_touch
 */
 ```
 
-Using Compass, f.ex in `application.css.scss.erb`
+Using Compass, f.ex in `application.css.scss`
 
 ```
 @import 'gallery/responsive/elastislide';
 @import 'gallery/responsive';
 @import 'gallery/slideshow';
 @import 'gallery/galleria';
+@import 'gallery/touch_touch';
 ```
 
 In `application.js` manifest file:
@@ -43,11 +46,25 @@ In `application.js` manifest file:
 //= require gallery/responsive
 //= require gallery/slideshow
 //= require gallery/galleria
+//= require gallery/touch_touch
 
 //= require jquery/jquery.easing-1.3
 //= require jquery/jquery.elastislide
 //= require jquery/jquery.tmpl.min
 ```
+
+## Touch-Touch
+
+```javascript
+$(function(){
+
+    // Initialize the gallery
+    $('#thumbs a').touchTouch();
+
+});
+```
+
+See [TouchTouch](http://tutorialzine.com/2012/04/mobile-touch-gallery/) and [github repo](https://github.com/martinaglv/touchTouch)
 
 ## Minimalistic Slideshow gallery
 
