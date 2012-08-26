@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "rails-gallery"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = "2012-08-22"
+  s.date = "2012-08-26"
   s.description = "Adds popular javascript galleries to asset pipeline and includes a few Rails Gallery utils and helpers"
   s.email = "kmandrup@gmail.com"
   s.extra_rdoc_files = [
@@ -170,19 +170,23 @@ Gem::Specification.new do |s|
     "vendor/assets/images/gallery/slideshow/icons/prev.png",
     "vendor/assets/images/gallery/slideshow/icons/prev_thumb.png",
     "vendor/assets/images/gallery/slideshow/icons/up.png",
+    "vendor/assets/images/gallery/touch_touch/arrows.png",
+    "vendor/assets/images/gallery/touch_touch/preloader.gif",
     "vendor/assets/javascripts/gallery/galleria-1.2.8.js",
     "vendor/assets/javascripts/gallery/galleria-1.2.8.min.js",
     "vendor/assets/javascripts/gallery/galleria/classic.js",
     "vendor/assets/javascripts/gallery/galleria/classic.min.js",
     "vendor/assets/javascripts/gallery/responsive.js",
     "vendor/assets/javascripts/gallery/slideshow.js",
+    "vendor/assets/javascripts/gallery/touch_touch.js",
     "vendor/assets/javascripts/jquery/jquery.easing-1.3.js",
     "vendor/assets/javascripts/jquery/jquery.elastislide.js",
     "vendor/assets/javascripts/jquery/jquery.tmpl.min.js",
     "vendor/assets/stylesheets/gallery/galleria/classic.css",
     "vendor/assets/stylesheets/gallery/responsive.css",
     "vendor/assets/stylesheets/gallery/responsive/elastislide.css",
-    "vendor/assets/stylesheets/gallery/slideshow.css"
+    "vendor/assets/stylesheets/gallery/slideshow.css",
+    "vendor/assets/stylesheets/touch_touch.css"
   ]
   s.homepage = "http://github.com/kristianmandrup/rails-gallery"
   s.licenses = ["MIT"]
