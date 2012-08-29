@@ -10,7 +10,7 @@ module RailsGallery
     end
 
     def gallery_image type, photo
-      meth_name = "#{type}gal_image"
+      meth_name = "#{type}_gallery_image"
       unless respond_to? meth_name
         raise ArgumentError, "Gallery #{type} is not yet supported. Please add a View helper module for this gallery using the convention followed by the other galleries..." 
       end
@@ -18,7 +18,7 @@ module RailsGallery
     end
 
     def gallery_imageset type, photo
-      meth_name = "#{type}gal_imageset"
+      meth_name = "#{type}_gallery_imageset"
       unless respond_to? meth_name
         raise ArgumentError, "Gallery #{type} is not yet supported for imageset. Please add a View helper module for this gallery using the convention followed by the other galleries..." 
       end

@@ -18,6 +18,10 @@ module RGallery
       end.join(',')
     end
 
+    def srcset?
+      !srcset.blank?
+    end
+
     # A photo can contain a source set of other photos!
     def source_photos
       return [] unless sources.kind_of? Array

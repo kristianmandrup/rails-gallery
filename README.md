@@ -293,7 +293,7 @@ There are also some view helpers included in `rails-gallery/view_helper.rb`
 
 `= gallery_image type, photo`
 
-Simple example:
+*Simple example:*
 
 Iterate all photos as a "single page".
 
@@ -302,7 +302,7 @@ Iterate all photos as a "single page".
   = gallery_image :responsive, photo`
 ```
 
-Pages example:
+*Pages example:*
 
 Iterate photos, one page at a time.
 
@@ -311,7 +311,7 @@ Iterate photos, one page at a time.
   = gallery_image :responsive, photo`
 ```
 
-Advanced example:
+*Advanced example:*
 
 Iterate photos, first page visible, then remaining pages invisible.
 
@@ -324,6 +324,37 @@ Iterate photos, first page visible, then remaining pages invisible.
   .page.hidden
     - page.photos.each do |photo|
       = gallery_image :responsive, photo`
+```
+
+### Shortcuts for view helpers
+
+```haml
+# galleria
+= riagal_image photo
+= riagal_imageset photo
+
+# slideshow
+= slidegal_image photo
+= slidegal_imageset photo
+
+# responsive
+= respgal_image photo
+= respgal_imageset photo
+
+# touchtouch
+= touchgal_image photo
+= touchgal_imageset photo
+```
+
+## Responsive images via "image srcset"
+
+The View Helpers also includes tag helpers to create image tags with [srcset](https://github.com/borismus/srcset-polyfill). This can be installed and used with [picturefill-rails](https://github.com/kristianmandrup/picturefill-rails)
+
+Example:
+
+```haml
+- photos.pages.each do |photo|
+  = gallery_imageset :responsive, photo`
 ```
 
 Enjoy!
@@ -340,7 +371,7 @@ Then add gallery client-side pieces to the assets folder following conventions a
 
 ## TODO
 
-Would perhaps be nice to allow pages/albums to have info assigned, such as title and/or description, tags etc. ?
+Would be nice to allow pages/albums to have info assigned, such as title and/or description, tags etc.
 
 ## Contributing to rails-gallery
  

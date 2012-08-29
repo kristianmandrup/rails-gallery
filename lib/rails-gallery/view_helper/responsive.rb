@@ -13,10 +13,10 @@ module RailsGallery
         end          
       end      
 
-      def respgal_imageset photo, srcset, options = {}
+      def respgal_imageset photo, options = {}
         options.merge! :alt => photo.alt
         options.merge! :"data-large" => photo.path, :"data-description" => photo.title
-        options.merge! :srcset => srcset
+        options.merge! :srcset => srcset if photo.srcset?
         return imageset_tag photo.thumb, options unless options.delete :wrap
         
         content_tag :li do
@@ -25,6 +25,8 @@ module RailsGallery
           end
         end
       end
+      alias_method :responsive_gallery_image, :respgal_image
+      alias_method :responsive_gallery_imageset, :respgal_imageset
     end
   end
 end
