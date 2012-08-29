@@ -1,4 +1,3 @@
 #galleria
   - photos.all.each do |photo|
-      %a{href:"/assets/#{photo.path}"}
-        = image_tag photo.path, :"data-title" => photo.title, :"data-description" => photo.description
+      galleria_image photo

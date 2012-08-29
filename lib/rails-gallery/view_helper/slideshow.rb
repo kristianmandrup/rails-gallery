@@ -1,8 +1,12 @@
 module RailsGallery
   module ViewHelper
     module Slideshow
-      def slideshow_gallery_image photo
-        image_tag photo.thumb, alt: "/assets/#{photo.path}"
+      def slidegal_image photo, options = {}
+        image_tag photo.thumb, options.merge(alt: photo.path)
+      end
+
+      def slidegal_imageset photo, srcset, options = {}
+        imageset_tag photo.thumb, options.merge(alt: photo.path, :srcset => srcset)
       end
     end
   end

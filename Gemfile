@@ -1,5 +1,8 @@
 source "http://rubygems.org"
 
+gem 'rails'
+gem 'hashie', '~> 1.2.0'
+
 group :development do
   gem "rspec",    ">= 2.8.0"
   gem "rdoc",     ">= 3.12"

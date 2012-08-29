@@ -10,6 +10,5 @@
       .es-carousel
         %ul
           - photos.all.each do |photo|
-            %li
-              %a{href:"#"}
-                = image_tag photo.thumb, :"data-large" => "/assets/#{photo.path}", :alt => photo.alt, :"data-description" => photo.title
+            = respgal_image photo, wrap: true
+                

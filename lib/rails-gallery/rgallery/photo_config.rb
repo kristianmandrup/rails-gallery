@@ -12,7 +12,7 @@ module RGallery
     protected
 
     def photo_class
-      @photo_class ||= Photos::Photo
+      @photo_class ||= RGallery::Photo
     end  
   end
 end

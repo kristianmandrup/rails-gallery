@@ -66,6 +66,10 @@ $(function(){
 
 See [TouchTouch](http://tutorialzine.com/2012/04/mobile-touch-gallery/) and [github repo](https://github.com/martinaglv/touchTouch)
 
+```haml
+= ttouch_image photo
+```
+
 ## Minimalistic Slideshow gallery
 
 See [minimalistic-slideshow-gallery](http://tympanus.net/codrops/2010/07/05/minimalistic-slideshow-gallery/) for more info.
@@ -186,6 +190,21 @@ class PropertiesController < ApplicationController
     @photos
   end
 end
+```
+
+The RGallery should now also support multiple photo sources for responsive galleries:
+
+```ruby
+@photos.pages.add_photo_w_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}, {src: 'banner-phone', sizing: '100w'}]
+
+# OR
+
+@photos.pages.add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
+
+OR on individual pages
+
+@photos.page(:first).add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
+
 ```
 
 This engine comes with a RGallery::Photos` model which can encapsulate your photos for display and allows you to group photos in multiple pages.
