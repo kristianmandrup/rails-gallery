@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "rails-gallery"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = "2012-08-26"
+  s.date = "2012-08-29"
   s.description = "Adds popular javascript galleries to asset pipeline and includes a few Rails Gallery utils and helpers"
   s.email = "kmandrup@gmail.com"
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "lib/rails-gallery/view_helper/galleria.rb",
     "lib/rails-gallery/view_helper/responsive.rb",
     "lib/rails-gallery/view_helper/slideshow.rb",
+    "lib/rails-gallery/view_helper/touch_touch.rb",
     "rails-gallery.gemspec",
     "spec/galleria_snippet.html",
     "spec/galleria_snippet.html.haml",
@@ -151,7 +152,8 @@ Gem::Specification.new do |s|
     "spec/images/responsive-gallery/images/thumbs/7.jpg",
     "spec/images/responsive-gallery/images/thumbs/8.jpg",
     "spec/images/responsive-gallery/images/thumbs/9.jpg",
-    "spec/rails-gallery_spec.rb",
+    "spec/rgallery/photos_spec.rb",
+    "spec/rgallery/property_photo.rb",
     "spec/spec_helper.rb",
     "vendor/assets/images/gallery/galleria/classic/loader.gif",
     "vendor/assets/images/gallery/galleria/classic/map.png",
@@ -198,12 +200,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<rails>, [">= 0"])
+      s.add_runtime_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_development_dependency(%q<rspec>, [">= 2.8.0"])
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
       s.add_development_dependency(%q<bundler>, [">= 1.0.0"])
       s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
       s.add_development_dependency(%q<simplecov>, [">= 0.5"])
     else
+      s.add_dependency(%q<rails>, [">= 0"])
+      s.add_dependency(%q<hashie>, ["~> 1.2.0"])
       s.add_dependency(%q<rspec>, [">= 2.8.0"])
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<bundler>, [">= 1.0.0"])
@@ -211,6 +217,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>, [">= 0.5"])
     end
   else
+    s.add_dependency(%q<rails>, [">= 0"])
+    s.add_dependency(%q<hashie>, ["~> 1.2.0"])
     s.add_dependency(%q<rspec>, [">= 2.8.0"])
     s.add_dependency(%q<rdoc>, [">= 3.12"])
     s.add_dependency(%q<bundler>, [">= 1.0.0"])
