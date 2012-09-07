@@ -136,9 +136,13 @@ $(function() {
 			},
 			_addImageWrapper= function() {
 				
+				try {
 				// adds the structure for the large image and the navigation buttons (if total items > 1)
 				// also initializes the navigation events
-				$('#img-wrapper-tmpl').tmpl( {itemsCount : itemsCount} ).prependTo( $rgGallery );				
+					$('#img-wrapper-tmpl').tmpl( {itemsCount : itemsCount} ).prependTo( $rgGallery );				
+				} catch(e) {
+					return;
+				}
 				
 				// $('#img-wrapper-tmpl').tmpl( {itemsCount : itemsCount} ).appendTo( $rgGallery );
 				
