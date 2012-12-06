@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "rails-gallery"
-  s.version = "0.2.2"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = "2012-08-29"
+  s.date = "2012-12-06"
   s.description = "Adds popular javascript galleries to asset pipeline and includes a few Rails Gallery utils and helpers"
   s.email = "kmandrup@gmail.com"
   s.extra_rdoc_files = [
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "config/locales/rails_gallery.yml",
     "lib/rails-gallery.rb",
     "lib/rails-gallery/engine.rb",
+    "lib/rails-gallery/photo_validation.rb",
     "lib/rails-gallery/rgallery.rb",
     "lib/rails-gallery/rgallery/page.rb",
     "lib/rails-gallery/rgallery/pages.rb",
@@ -152,6 +153,7 @@ Gem::Specification.new do |s|
     "spec/images/responsive-gallery/images/thumbs/7.jpg",
     "spec/images/responsive-gallery/images/thumbs/8.jpg",
     "spec/images/responsive-gallery/images/thumbs/9.jpg",
+    "spec/rails-gallery/view_helper_spec.rb",
     "spec/rgallery/photos_spec.rb",
     "spec/rgallery/property_photo.rb",
     "spec/spec_helper.rb",
@@ -176,6 +178,7 @@ Gem::Specification.new do |s|
     "vendor/assets/images/gallery/touch_touch/preloader.gif",
     "vendor/assets/javascripts/gallery/galleria-1.2.8.js",
     "vendor/assets/javascripts/gallery/galleria-1.2.8.min.js",
+    "vendor/assets/javascripts/gallery/galleria.js",
     "vendor/assets/javascripts/gallery/galleria/classic.js",
     "vendor/assets/javascripts/gallery/galleria/classic.min.js",
     "vendor/assets/javascripts/gallery/responsive.js",
@@ -188,7 +191,7 @@ Gem::Specification.new do |s|
     "vendor/assets/stylesheets/gallery/responsive.css",
     "vendor/assets/stylesheets/gallery/responsive/elastislide.css",
     "vendor/assets/stylesheets/gallery/slideshow.css",
-    "vendor/assets/stylesheets/touch_touch.css"
+    "vendor/assets/stylesheets/gallery/touch_touch.css"
   ]
   s.homepage = "http://github.com/kristianmandrup/rails-gallery"
   s.licenses = ["MIT"]
