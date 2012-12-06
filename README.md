@@ -53,6 +53,8 @@ In `application.js` manifest file:
 //= require jquery/jquery.tmpl.min
 ```
 
+Note: For galleria, you need to specify the theme to use.
+
 ## Touch-Touch
 
 ```javascript
@@ -155,61 +157,23 @@ $(document).ready(function() {
 
 See [galleria.io](http://galleria.io) for more info.
 
-## Rails engine usage
+[quick start](http://galleria.io/docs/getting_started/quick_start/)
 
-This gem is a Rails 3+ engine :)
+```javascript
+  Galleria.loadTheme('gallery/galleria/classic.min.js');
 
-Some *HAML* views (partials) are included in `app/views/gallery`
+  // configure
+  Galleria.configure({
+      imageCrop: true,
+      transition: 'fade'
+  });  
 
-## Rails views usage
-
-```ruby
-class PropertiesController < ApplicationController
-  def show
-    @property = property
-  end
-
-  protected
-
-  def property
-    Hashie::Mash.new  title: 'A beautiful property', 
-                      description: decription,
-                      photos: photos
-  end
-
-  def description
-    %q{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris arcu, auctor ac rhoncus non,  libero. Nulla dolor velit, volutpat a bibendum ut, hendrerit id mi. Pellentesque convallis erat in mi interdum rutrum. Phasellus interdum velit nulla.
-    }
-  end  
-
-  def photos
-    @photos ||= RGallery::Photos.new nil, photo_class: Property::Photo
-    5.times do
-      @photos.pages << 6.times.map {|n| (Kernel.rand(7) + 1).to_s }
-    end
-    @photos
-  end
-end
+  Galleria.run('#galleria');
 ```
 
-The RGallery should now also support multiple photo sources for responsive galleries:
+### Model Configuration
 
-```ruby
-@photos.pages.add_photo_w_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}, {src: 'banner-phone', sizing: '100w'}]
-
-Note: See module `RGallery::Pages` class.
-
-# OR
-
-@photos.pages.add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
-
-# OR on individual pages
-
-@photos.page(:first).add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
-
-```
-
-This engine comes with a RGallery::Photos` model which can encapsulate your photos for display and allows you to group photos in multiple pages.
+The engine comes with a RGallery::Photos` model which can encapsulate your photos for display and allows you to group photos in multiple pages.
 The `RGallery::Photo` class is a base class for describing a photo. 
 
 You should create your own Photo class that inherits from `RGallery::Photo` (or implements the API), which knows how to render and describe your photos.
@@ -277,9 +241,72 @@ In order to help debug the configuration of the photo class, you can use the vie
 
 Or you can include the `RailsGallery::PhotoValidation` module anywhere you want to leverage these methods!
 
-Then in your `properties/show.html.haml`:
+
+## Rails engine usage
+
+The `RailsGallery::ViewHelper` is inluded into ActionView::Base by the engine.
+
+The following are the main methods exposed:
+
+* gallery_image type, photo
+* gallery_imageset type, photo
+
+Example usage:
+
+```haml
+= gallery_image :responsive, photo`
+= gallery_imageset :galleria, photo`
+```
+
+The photo argument must be a kind of `RGallery::Photo::
+
+### Controller and partials
+
+Some *HAML* views (partials) are included in `app/views/gallery`
+
+### Rails views usage
+
+First set up photos in your controller.
+
+```ruby
+class PropertiesController < ApplicationController
+  def show
+    @property = property
+  end
+
+  protected
+
+  def property
+    Hashie::Mash.new  title: 'A beautiful property', 
+                      description: decription,
+                      photos: photos
+  end
+
+  def description
+    %q{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mauris arcu, auctor ac rhoncus non,  libero. Nulla dolor velit, volutpat a bibendum ut, hendrerit id mi. Pellentesque convallis erat in mi interdum rutrum. Phasellus interdum velit nulla.
+    }
+  end  
+
+  def photos
+    @photos ||= RGallery::Photos.new nil, photo_class: Property::Photo
+    5.times do
+      @photos.pages << 6.times.map {|n| (Kernel.rand(7) + 1).to_s }
+    end
+    @photos
+  end
+end
+```
+
+In `property/show.html.haml`, render one of the partials of this gem, sending it the list of photos as a local variable `photo`:
+
+```haml
+.gallery
+  = render partial: 'gallery/gallery', locals: { photos: @property.photos}
+```
 
 *Responsive Gallery*
+
+In your `properties/show.html.haml`:
 
 ```haml
 = render partial: 'gallery/template/responsive'
@@ -315,7 +342,7 @@ The engine includes a `config/locales/rails_gallery.yml` file, currently only wi
 
 ## View helpers
 
-There are also some view helpers included in `rails-gallery/view_helper.rb`
+There are some view helpers included in `rails-gallery/view_helper.rb`
 
 `= gallery_image type, photo`
 
@@ -352,6 +379,25 @@ Iterate photos, first page visible, then remaining pages invisible.
       = gallery_image :responsive, photo`
 ```
 
+## Responsive gallery support
+
+The RGallery also supports multiple photo sources for responsive galleries:
+
+```ruby
+@photos.pages.add_photo_w_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}, {src: 'banner-phone', sizing: '100w'}]
+
+Note: See module `RGallery::Pages` class.
+
+# OR
+
+@photos.pages.add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
+
+# OR on individual pages
+
+@photos.page(:first).add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
+
+```
+
 ### Shortcuts for view helpers
 
 ```haml
@@ -374,7 +420,7 @@ Iterate photos, first page visible, then remaining pages invisible.
 
 ## Responsive images via "image srcset"
 
-The View Helpers also includes tag helpers to create image tags with [srcset](https://github.com/borismus/srcset-polyfill). This can be installed and used with [picturefill-rails](https://github.com/kristianmandrup/picturefill-rails)
+The View Helpers includes tag helpers to create image tags with [srcset](https://github.com/borismus/srcset-polyfill). This can be installed and used with [picturefill-rails](https://github.com/kristianmandrup/picturefill-rails)
 
 Example:
 
