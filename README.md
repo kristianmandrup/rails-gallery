@@ -203,7 +203,7 @@ Note: See module `RGallery::Pages` class.
 
 @photos.pages.add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
 
-OR on individual pages
+# OR on individual pages
 
 @photos.page(:first).add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
 
