@@ -4,7 +4,7 @@ Popular Javascript Photo galleries/carousels ready to use with Rails 3+.
 
 ## Usage
 
-`gem 'rails-gallery'
+`gem 'rails-gallery'`
 
 ## Galleries included
 
@@ -21,12 +21,11 @@ In `application.css` manifest file:
 
 ```css
 /*
- * require responsive-gallery
- * require gallery/responsive/elastislide
- * require gallery/responsive/style
- * require gallery/slideshow
- * require gallery/galleria
- * require gallery/touch_touch
+ *= require gallery/responsive/elastislide
+ *= require gallery/responsive
+ *= require gallery/slideshow
+ *= require gallery/galleria/classic
+ *= require gallery/touch_touch
 */
 ```
 
@@ -36,7 +35,7 @@ Using Compass, f.ex in `application.css.scss`
 @import 'gallery/responsive/elastislide';
 @import 'gallery/responsive';
 @import 'gallery/slideshow';
-@import 'gallery/galleria';
+@import 'gallery/galleria/classic';
 @import 'gallery/touch_touch';
 ```
 
@@ -46,6 +45,7 @@ In `application.js` manifest file:
 //= require gallery/responsive
 //= require gallery/slideshow
 //= require gallery/galleria
+//= require gallery/galleria/classic
 //= require gallery/touch_touch
 
 //= require jquery/jquery.easing-1.3
@@ -67,7 +67,7 @@ $(function(){
 See [TouchTouch](http://tutorialzine.com/2012/04/mobile-touch-gallery/) and [github repo](https://github.com/martinaglv/touchTouch)
 
 ```haml
-= ttouch_image photo
+= touchgal_image photo
 ```
 
 ## Minimalistic Slideshow gallery
@@ -197,6 +197,8 @@ The RGallery should now also support multiple photo sources for responsive galle
 ```ruby
 @photos.pages.add_photo_w_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}, {src: 'banner-phone', sizing: '100w'}]
 
+Note: See module `RGallery::Pages` class.
+
 # OR
 
 @photos.pages.add_photo_sources 'banner' => [{src: 'banner-HD', sizing: '2x'}], 'logo' => [{src: 'logo-HD', sizing: '2x'}
@@ -212,7 +214,7 @@ The `RGallery::Photo` class is a base class for describing a photo.
 
 You should create your own Photo class that inherits from `RGallery::Photo` (or implements the API), which knows how to render and describe your photos.
 
-Here a rough example:
+Here is a rough example:
 
 ```ruby
 class Property
@@ -234,6 +236,13 @@ class Property
       'responsive-gallery/images'
     end
 
+    # The filename of the picture. 
+    # Here it assumes that the id assigned is a Property object, which has a 
+    # method 'picture' which returns the picture id.
+    def filename
+      "property-#{id.picture}"
+    end    
+
     def title
       'property title'
     end
@@ -249,7 +258,18 @@ class Property
 end
 ```
 
-See the `lib/rails-gallery/rgallery/photos.rb
+See the `lib/rails-gallery/rgallery/photos.rb` for details on how to extend this class appropriately to fit your scenario.
+
+*debugging*
+
+In order to help debug the configuration of the photo class, you can use the view_helper methods:
+
+```ruby
+= validate_gallery_photo photo # prints error msg if invalid
+- validate_gallery_photo! photo # raise error if invalid
+```
+
+Or you can include the `RailsGallery::PhotoValidation` module anywhere you want to leverage these methods!
 
 Then in your `properties/show.html.haml`:
 

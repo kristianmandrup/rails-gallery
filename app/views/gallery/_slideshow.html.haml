@@ -13,12 +13,12 @@
     .msg_thumb_wrapper      
       - photos.page(:first).photos.each do |photo|
         %a{href: "#"}
-          = ssgal_image photo
+          = gallery_image :slideshow photo
     - photos.pages.remainder.each do |page|
       .msg_thumb_wrapper{style: 'display:none'}
         - page.photos.each do |photo|
           %a{href: "#"}
-            = ssgal_image photo
+            = gallery_image :slideshow, photo
     %a#msg_thumb_next.msg_thumb_next{href: '#'}
     %a#msg_thumb_prev.msg_thumb_prev{href: '#'}
     %a#msg_thumb_close.msg_thumb_close{href: '#'} 

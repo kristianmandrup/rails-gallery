@@ -10,5 +10,5 @@
       .es-carousel
         %ul
           - photos.all.each do |photo|
-            = respgal_image photo, wrap: true
+            = gallery_image :responsive, photo, wrap: true
                 
