@@ -2,8 +2,8 @@ module RGallery
   class Page < PhotoConfig
     include Enumerable
 
-    def initialize photo_ids = [], options = {}
-      @photo_ids = photo_ids
+    def initialize photo_objs = [], options = {}
+      @photo_objs = photo_objs
       super options
     end
 
@@ -18,9 +18,9 @@ module RGallery
       end
     end
 
-    def << photo_ids
-      @photo_ids ||= []
-      @photo_ids += [photo_ids].flatten
+    def << photo_objs
+      @photo_objs ||= []
+      @photo_objs += [photo_objs].flatten
     end
 
     def add_photo_sources sources_hash
@@ -40,12 +40,12 @@ module RGallery
       @photos << photo_class.new(key, options.merge(:sources => srclist))
     end
 
-    def photo_ids
-      @photo_ids ||= []
+    def photo_objs
+      @photo_objs ||= []
     end   
 
     def photos
-      @photos ||= photo_ids.map {|id| photo_class.new id, options } 
+      @photos ||= photo_objs.map {|obj| photo_class.new obj, options } 
     end   
 
     delegate :empty?, to: :photos 

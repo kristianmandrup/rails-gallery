@@ -183,6 +183,11 @@ Here is a rough example:
 ```ruby
 class Property
   class Photo < RGallery::Photo
+    def initialize property, options = {}
+      super
+    end
+    alias_method :property, :obj
+
     def path
       File.join folder, super
     end
@@ -289,8 +294,9 @@ class PropertiesController < ApplicationController
 
   def photos
     @photos ||= RGallery::Photos.new nil, photo_class: Property::Photo
-    5.times do
-      @photos.pages << 6.times.map {|n| (Kernel.rand(7) + 1).to_s }
+    5.times do |n|
+      # using a paginator to get a page of properties
+      @photos.pages << Property.page(n)
     end
     @photos
   end

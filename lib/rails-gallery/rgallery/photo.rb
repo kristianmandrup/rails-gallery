@@ -1,13 +1,15 @@
 module RGallery
   class Photo
-    attr_reader :id, :sizing, :sources, :options
+    attr_reader :obj, :sizing, :sources, :options
 
-    def initialize id, options = {}
-      @id = id
+    def initialize obj, options = {}
+      @obj = obj
       self.sources = options.delete :sources
       @sizing = options.delete :sizing
       @options = options
     end
+
+    alias_method :id, :obj
 
     # map [{src: 'banner-HD.jpeg', sizing: '2x'}, {src: 'banner-phone.jpeg', sizing: '100w'}]
     # into -> "banner-HD.jpeg 2x, banner-phone.jpeg 100w
