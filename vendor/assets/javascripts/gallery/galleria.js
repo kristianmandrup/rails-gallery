@@ -815,6 +815,7 @@ var undef,
             },
 
             loadCSS : function( href, id, callback ) {
+                Galleria.log('load CSS:', href, id);
 
                 var link,
                     length;
@@ -889,6 +890,7 @@ var undef,
                         error: function() {
                             $loader.remove();
 
+                            Galleria.log("Theme CSS likely didn't include the dummy #galleria-loader marker introduced and required since Galleria 1.2.8");
                             // If failed, tell the dev to download the latest theme
                             Galleria.raise( 'Theme CSS could not load after 20 sec. Please download the latest theme at http://galleria.io/customer/', true );
 
@@ -5036,6 +5038,8 @@ Galleria.addTheme = function( theme ) {
 
         // look for manually added CSS
         $('link').each(function( i, link ) {
+            Galleria.log('Trying to load Galleria theme from manually added CSS');
+
             reg = new RegExp( theme.css );
             if ( reg.test( link.href ) ) {
 
@@ -5051,12 +5055,23 @@ Galleria.addTheme = function( theme ) {
 
         // else look for the absolute path and load the CSS dynamic
         if ( !css ) {
+            Galleria.log('Trying to load Galleria theme CSS from absolute path');
 
             $('script').each(function( i, script ) {
+                var themeName = theme.name.toLowerCase();
+                Galleria.log('Looking for Galleria theme:', themeName);
+
+                var matchExpr1 = 'galleria\\.' + themeName + '\\.';
+                var matchExpr2 = 'galleria\\/' + themeName + '\\.';
+
+                Galleria.log('Find match for:', matchExpr1, matchExpr2);
+                Galleria.log('In script src:', script.src);
 
                 // look for the theme script
-                reg = new RegExp( 'galleria\\.' + theme.name.toLowerCase() + '\\.' );
-                if( reg.test( script.src )) {
+                reg1 = new RegExp( matchExpr1 );
+                reg2 = new RegExp( matchExpr2 );
+                if( reg1.test(script.src) || reg2.test(script.src) ) {
+                    Galleria.log('Theme match found!');
 
                     // we have a match
                     css = script.src.replace(/[^\/]*$/, '') + theme.css;
@@ -5094,6 +5109,15 @@ Galleria.addTheme = function( theme ) {
 
     @returns Galleria
 */
+Galleria.loadNamedTheme = function(name, options) {
+  var prefix = 'gallery/galleria/';
+  Galleria.loadTheme(prefix + name + '.js');
+}
+
+Galleria.loadAssetTheme = function(name, options) {
+  var prefix = '/assets/gallery/galleria/';
+  Galleria.loadTheme(prefix + name + '.js');
+}
 
 Galleria.loadTheme = function( src, options ) {
 
@@ -5296,6 +5320,9 @@ Galleria.utils = Utils;
 */
 
 Galleria.log = function() {
+    if (Galleria.configure.options['log'] != true) {
+        return null;
+    }
     var args = Utils.array( arguments );
     if( 'console' in window && 'log' in window.console ) {
         try {
@@ -5467,6 +5494,35 @@ Galleria.Picture.prototype = {
     // the inherited cache object
     cache: {},
 
+    normalizeSrc: function(src) {
+        Galleria.log('attempt normalize', src);
+
+        var normalizedSrc = src;
+
+        if (Galleria.configure.options.assets == true) {
+            var regAsAs = new RegExp('assets\\/assets');
+
+            if (regAsAs.test(src)) {
+                Galleria.log('Replace double assets/assets in image path');
+                normalizedSrc = src.replace("assets\/assets", "assets")
+            } else {
+                var regAs = new RegExp('assets\\/');
+                if (!regAs.test(src)) {
+                    Galleria.log('Add missing assets in image path:', src);
+                    normalizedSrc = 'assets/' + src;
+                }                
+            }
+            // ensure image path is never relative to current page!
+            if (!new RegExp('^\\/').test(normalizedSrc)) {
+                normalizedSrc = '/' + normalizedSrc;
+            }        
+        }
+        Galleria.log('normalized src to', normalizedSrc);
+
+        // var srcStamp = src + '?' + Utils.timestamp();
+        return normalizedSrc;
+    },
+
     // show the image on stage
     show: function() {
         Utils.show( this.image );
@@ -5502,6 +5558,12 @@ Galleria.Picture.prototype = {
     */
 
     preload: function( src ) {
+        Galleria.log('attempt preload', src);
+
+        var src = this.normalizeSrc(src);
+
+        Galleria.log('normalized', src);
+
         $( new Image() ).load((function(src, cache) {
             return function() {
                 cache[ src ] = src;
@@ -5521,11 +5583,17 @@ Galleria.Picture.prototype = {
     */
 
     load: function(src, size, callback) {
+        Galleria.log('load image:', src, size);
+
+        var src = this.normalizeSrc(src);
+
+        Galleria.log('load normalized image:', src, size);
 
         if ( typeof size == 'function' ) {
             callback = size;
             size = null;
         }
+            
 
         if( this.isIframe ) {
             var id = 'if'+new Date().getTime();
@@ -5855,6 +5923,7 @@ Galleria.Picture.prototype = {
         return this;
     }
 };
+
 
 // our own easings
 $.extend( $.easing, {

@@ -159,17 +159,50 @@ See [galleria.io](http://galleria.io) for more info.
 
 [quick start](http://galleria.io/docs/getting_started/quick_start/)
 
-```javascript
-  Galleria.loadTheme('gallery/galleria/classic.min.js');
-
-  // configure
-  Galleria.configure({
-      imageCrop: true,
-      transition: 'fade'
-  });  
-
-  Galleria.run('#galleria');
+```css
+#galleria { 
+  width: 700px; 
+  height: 400px; 
+  background: white 
+}
 ```
+
+Important: You need to specify the width and height of the galleria container object in your CSS (here the `#galleria` DOM node). Otherwise you will get a trace error!
+
+```javascript
+Galleria.loadTheme('gallery/galleria/classic.js');
+
+// or simply
+Galleria.loadNamedTheme('classic');
+
+// or for asset path
+Galleria.loadAssetTheme('classic');
+
+// Then configure
+Galleria.configure({
+    imageCrop: true,
+    transition: 'fade',
+    log: true,
+    // better handle image paths in assets folder!
+    assets: true,
+    // if pic can't be loaded use this one as fallback
+    dummy: '/assets/photos/dummy.png' 
+});  
+
+Galleria.run('#galleria');
+```
+
+*Troubleshooting a javascript gallery*
+
+Many of the Javascript galleries don't play very well with Rails and the asset pipeline as they expect a pretty simple application file structure/setup.
+
+As an example, in order to make *galleria* work, I had to add a `normalizeSrc` method, which ensures that it looks for an image of the form `/assets/...` when configured with `assets: true` (See `Galleria.configure` options).
+
+You might well encounter similar troubles. Another potential problem is browser caching, where you might well have to add a timestamp to the image url. Something like:
+
+`my/image.png?235325325323232`
+
+In some cases you might wanna hide the image tags and only execute/initialize the gallery when the images have finished loading, fx via the `imagesLoaded` jQuery plugin. Good luck!
 
 ### Model Configuration
 
