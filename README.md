@@ -105,7 +105,7 @@ Change `mode = 'carousel'` to `'fullview'`
 
 To adjust placement of thumbnails, use: `prependTo` or `appendTo` in `gallery/responsive.js`:
 
-``javascript
+```javascript
   _addImageWrapper= function() {
     
     // adds the structure for the large image and the navigation buttons (if total items > 1)
@@ -116,7 +116,7 @@ To adjust placement of thumbnails, use: `prependTo` or `appendTo` in `gallery/re
 *Automatic slideshow*
 
 I wanted the same thing and I find a way to do it.
-In the file gallery.js, in the function _initCarousel add these lines after: 
+In the file gallery.js, in the function `_initCarousel` add these lines after: 
 
 `$esCarousel.elastislide( 'setCurrent', current );`
 
@@ -233,22 +233,28 @@ class Property
     end
 
     def folder
-      'responsive-gallery/images'
+      'gallery/images'
+    end
+
+    # Here we expect to create each photo with the 
+    # id being set to a Property object
+    def property
+      id
     end
 
     # The filename of the picture. 
     # Here it assumes that the id assigned is a Property object, which has a 
     # method 'picture' which returns the picture id.
     def filename
-      "property-#{id.picture}"
+      "property-#{property.picture}"
     end    
 
     def title
-      'property title'
+      property.title
     end
 
     def alt
-      'property alt'
+      title
     end
     
     def self.extension
