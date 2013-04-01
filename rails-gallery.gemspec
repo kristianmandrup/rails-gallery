@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "Gallery functionality for Rails apps"
   spec.description   = "Add photo galleries to your Rails apps :)"
   spec.email         = "kmandrup@gmail.com"
+  spec.homepage      = "https://github.com/kristianmandrup/rails-gallery"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
