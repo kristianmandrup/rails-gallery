@@ -485,7 +485,23 @@ Then add gallery client-side pieces to the assets folder following conventions a
 Would be nice to allow pages/albums to have info assigned, such as title and/or description, tags etc.
 
 ## Contributing to rails-gallery
+
+See [building gem with bundler](http://no-fucking-idea.com/blog/2012/04/11/building-gem-with-bundler/)
+
+Update `VERSION` referenced from .gemspec file in `lib/rails-gallery/version.rb`
+
+Build the new version of the gem:
+
+`$ gem build rails-gallery.gemspec`
+
+Generate rspec:
+
+`gem spec rails-gallery-0.3.3.gem`
  
+Push (publish) to rubygems:
+
+`gem push rails-gallery-0.3.3.gem`
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.

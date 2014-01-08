@@ -11,6 +11,10 @@ require 'action_view/template'
 require 'rspec'
 require 'rails-gallery'
 
+RSpec.configure do |config|
+
+end
+
 module ControllerTestHelpers
 
   def self.included(base)
