@@ -6,7 +6,7 @@ require "rails-gallery/version"
 Gem::Specification.new do |spec|
   spec.name          = "rails-gallery"
   spec.version       = RailsGallery::VERSION
-  spec.authors       = ["Kristian Mandrup"]
+  spec.authors       = ["Kristian Mandrup", "Mike Davis"]
   spec.date          = "2012-10-11"
   spec.summary       = "Gallery functionality for Rails apps"
   spec.description   = "Add photo galleries to your Rails apps :)"

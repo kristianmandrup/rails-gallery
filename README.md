@@ -8,10 +8,10 @@ Popular Javascript Photo galleries/carousels ready to use with Rails 3+.
 
 ## Galleries included
 
-* slideshow
-* responsive
-* galleria
-* touch_touch
+* slideshow (v ???)
+* responsive (v ???)
+* galleria (v1.4.2)
+* touch_touch (v ???)
 
 Please add more using a similar convention as is used for these galleries ;)
 
